@@ -18,8 +18,6 @@ $ docker-compose up -d
 Once the containers are running:
 ````bash
 $ docker exec -it php_movies_importer bash
-$ docker-compose up -d
-$ sudo echo '127.0.0.1 red-tea.docker.local' >> /etc/hosts
 ````
 
 Inside the container run composer install:
