@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx
+    container_name: movies_importer
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    volumes:
+      - ./configurations/nginx/vhost.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./movies_importer:/var/www/html:rw
+    links:
+      - php-app
+  php-app:
+    build: ./configurations/docker
+    container_name: php_movies_importer
+    volumes:
+      - ./movies_importer:/var/www/html:rw
+      - ./configurations/others/bash_aliases.txt:/root/.bash_aliases:rw
+      - ./configurations/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro
+    privileged: true
+    tty: true
+    links:
+      - database-app
+      - memcache-app
+      - elasticsearch-app
+  database-app:
+    image: mysql:5.7
+    container_name: mysql_movies_importer
+    environment:
+      MYSQL_DATABASE: movies_importer
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: apupiales
+      MYSQL_PASSWORD: apupiales123
+    volumes:
+      - ./configurations/mysql/data:/var/lib/mysql
+  memcache-app:
+    image: memcached
+    container_name: memcached_movies_importer
+  elasticsearch-app:
+    image: elasticsearch:7.10.1
+    container_name: elastic_movies_importer
+    ports:
+     - "9202:9200"
+     - "9302:9300"
+    environment:
+      discovery.type: "single-node"
