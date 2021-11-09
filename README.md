@@ -36,7 +36,7 @@ $ drush site-install standard \
 --site-mail=dumy@test.com
 ````
 
-##API data import
+## API data import
 The module with this logic is dc_movies_content_import. There is a form to config the connection setting where you can set an API key. This form is accessible in the WEB SERVICES section in admin/config or directly in /admin/config/services/api-connection-settings.
 To get the API key, login or register in https://www.themoviedb.org/settings/api 
 To import the content you just need to execute the next commands in this exactly order (be patient, there is a lot of content to import):
