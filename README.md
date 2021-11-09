@@ -1,7 +1,7 @@
 # drupal9-movies-import
 Challenge in Drupal 9 to get information and create local content from themoviedb (https://www.themoviedb.org/terms-of-use)
 
-Note: The original version was written around an the end of 2019, it is just an ugrade to make this code work in D9
+Note: The original version was written around at the end of 2019, it is just an ugrade to make this code work in D9
 ## Requirementes
 https://docs.docker.com/get-docker/
 
